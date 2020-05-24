@@ -1,0 +1,99 @@
+<div class="header">
+  <h1>XT Assignment</h1>
+</div>
+<div class="topnav">
+  <a href="#" style="float:right"></a>
+</div>
+
+<div class="row">
+  <div class="leftcolumn">
+    <div class="cardPanel">
+      <label class="field-label">Species</label><br>
+      <input id="human" class="speciesCheckBox" [formControl]="humanCheckbox" type="checkbox" /> Human<br>
+      <input id="mythology" class="speciesCheckBox" [formControl]="mythologyCheckbox" type="checkbox" /> Mythology<br>
+      <input id="other" class="speciesCheckBox" [formControl]="otherSpeciesCheckbox" type="checkbox" /> Other Species...
+    </div>
+    <div class="cardPanel">
+      <div class="element">
+        <label class="field-label">Gender</label><br>
+        <input id="male" class="genderCheckBox" [formControl]="maleCheckbox" type="checkbox" /> Male<br>
+        <input id="female" class="genderCheckBox" [formControl]="femaleCheckbox" type="checkbox" /> Female
+      </div>
+    </div>
+    <div class="cardPanel">
+      <label class="field-label">Origin</label><br>
+      <input id="earth" class="originCheckBox" [formControl]="earthCheckbox" type="checkbox" /> Earth<br>
+      <input id="nuptia" class="originCheckBox" [formControl]="nuptiaCheckbox" type="checkbox" /> Nuptia 4<br>
+      <input id="unknown" class="originCheckBox" [formControl]="unknownCheckbox" type="checkbox" /> Unknown<br>
+      <input id="otherOrigins" class="originCheckBox" [formControl]="otherOriginsCheckbox" type="checkbox" /> Other
+      Origins...
+    </div>
+  </div>
+  <div class="rightcolumn">
+    <div class="card">
+      <div>
+        <div class="container">
+          <div class="item">
+            <form class="example" action="/action_page.php" style="margin:auto;max-width:300px">
+              <input type="text" [formControl]="filter" placeholder="Search item by name" name="search2">
+              <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+          </div>
+          <div class="item push-right">
+            <select id="order" class="sortCls" [formControl]="order">
+              <option value=''>Select Sorting</option>
+              <option *ngFor="let sort of sorting" [value]="sort.id">{{sort.name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="filteredStates$ | async as infoData">
+        <div class="col-3 col-sm-3  col-md-3 col-lg-3" *ngFor="let data of infoData; let i = index">
+          <div class="boxCls">
+            <div class="innerBox">
+                    <img [src]=data.image alt="Image" width="150" height="200">
+                    <div class="text-block">
+                         <div class="floatingCls">
+                            <h1 class="labelColor upperFont">{{data.name}}</h1>
+                            <h5 class="labelColor upperFont">{{data.id}} {{data.year}} years ago</h5>
+                            </div> 
+              <div>
+                <br>
+                <form>
+                  <div class="form-group form-inline">
+                    <label class="labelColor">STATUS: </label>
+                    <label class="labelVal">{{data.status}}</label>
+                  </div>
+                </form>
+                <form>
+                  <div class="form-group form-inline">
+                    <label class="labelColor">GENDER: </label>
+                    <label class="labelVal">{{data.gender}}</label>
+                  </div>
+                </form>
+                <form>
+                  <div class="form-group form-inline">
+                    <label class="labelColor">SPECIES: </label>
+                    <label class="labelVal">{{data.species}}</label>
+                  </div>
+                </form>
+                <form>
+                  <div class="form-group form-inline">
+                    <label class="labelColor">ORIGIN: </label>
+                    <label class="labelVal">{{data.origin.name}}</label>
+                  </div>
+                </form>
+                <form>
+                  <div class="form-group form-inline">
+                    <label class="labelColor">LAST LOCATION: </label>
+                    <label class="labelVal">{{data.location.name}}</label>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
